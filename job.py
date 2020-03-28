@@ -24,7 +24,9 @@ def amazon_links(id, youtube_url):
 
     if len(amazon_links) > 0:
         for link in amazon_links:
-            abunda_links.append(convert(link))
+            converted_link = convert(link)
+            if converted_link:
+                abunda_links.append(converted_link)
 
     
     JSON = {"id": id, "views": video_views, "abunda_links": abunda_links}
