@@ -29,7 +29,7 @@ def amazon_links(id, youtube_url):
     
     JSON = {"id": id, "views": video_views, "abunda_links": abunda_links}
 
-    post_url = "https://{}:{}@abunda-engine.herokuapp.com/video_callbacks/receive_data/video_callbacks/receive_data".format(username, password)
+    post_url = "https://{}:{}@abunda-engine.herokuapp.com/video_callbacks/receive_data".format(username, password)
        
     requests.post(post_url, json=JSON)
     
