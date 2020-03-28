@@ -1,0 +1,7 @@
+selenium
+flask
+flask_restful
+gunicorn
+celery
+requests
+redis
