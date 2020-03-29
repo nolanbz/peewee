@@ -1,4 +1,4 @@
-from celery import Celery task
+from celery import Celery
 from description import getlinks
 from abunda import convert
 import os
