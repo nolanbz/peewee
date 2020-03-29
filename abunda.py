@@ -10,11 +10,9 @@ def convert(link):
 
     if get_request.status_code == 200:
         response = get_request.json()
-        print(response)
         try:
             price = response["price_good"]
-            # Check if price is over $50
-            print(price)
+            # Check if price is over $50            
             if price:
                 abunda_url = response["url"]
         except:

@@ -1,4 +1,4 @@
-from celery import Celery
+from celery import Celery task
 from description import getlinks
 from abunda import convert
 import os
@@ -11,9 +11,11 @@ username = os.environ.get('USERNAME')
 password = os.environ.get('PASSWORD')
 
 @app.task
-def amazon_links(id, youtube_url):
+def amazon_links(video_id, youtube_url, channel_id):
 
     print(youtube_url)
+    print(video_id)
+    print(channel_id)
 
     abunda_links = []
     amazon_links = []
@@ -31,7 +33,7 @@ def amazon_links(id, youtube_url):
                 abunda_links.append(converted_link)
 
     
-    JSON = {"id": id, "views": video_views, "abunda_links": abunda_links}
+    JSON = {"video_id": video_id, "views": video_views, "abunda_links": abunda_links}
 
     post_url = "https://{}:{}@abunda-engine.herokuapp.com/video_callbacks/receive_data".format(username, password)
        
