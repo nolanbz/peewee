@@ -2,6 +2,7 @@ import requests
 
 def filterlinks(links):
 
+    dirty_amazon_links = []
     amazon_links = []
 
     black_list = ["youtube", "pinterest", "blogspot", "instagram", "twitter", "facebook", "goo.gl", "kit.co",
@@ -14,12 +15,12 @@ def filterlinks(links):
                 try:
                     data = requests.request("GET", link)
                     url = data.url
-                    amazon_links.append(url)
+                    dirty_amazon_links.append(url)
                 except:
                     print("Failed to convert amazon link... keeping flow")
 
-    for link in amazon_links:
-        if "amazon.com" not in link:
-            amazon_links.remove(link)
+    for link in dirty_amazon_links:
+        if "amazon.com" in link:
+            amazon_links.append(link)
 
     return amazon_links
