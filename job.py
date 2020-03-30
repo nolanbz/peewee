@@ -13,16 +13,16 @@ password = os.environ.get('PASSWORD')
 
 
 @app.task
-def amazon_links(video_id, youtube_url):
+def amazon_links(video_id, video_url):
 
-    print(youtube_url)
+    print(video_url)
     print(video_id)
 
     abunda_links = []
     amazon_links = []
     video_views = ""
     
-    data = getlinks(youtube_url)
+    data = getlinks(video_url)
 
     video_views = data[0]
     amazon_links = data[1]
