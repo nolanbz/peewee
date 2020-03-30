@@ -22,6 +22,7 @@ def youtube_post():
             if link:
                 payload = "we workin"
                 amazon_links.apply_async((video_id, link, channnel_id), queue=channnel_id)
+                
             else:
                 payload = "missing link", 400
         else:

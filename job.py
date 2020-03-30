@@ -15,6 +15,8 @@ password = os.environ.get('PASSWORD')
 @app.task
 def amazon_links(video_id, youtube_url, channel_id):
 
+    app.control.add_consumer(channel_id, reply=True)
+
     print(youtube_url)
     print(video_id)
     print(channel_id)
