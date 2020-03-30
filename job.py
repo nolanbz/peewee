@@ -3,12 +3,14 @@ from description import getlinks
 from abunda import convert
 import os
 import requests
+import time
 
 app = Celery()
 app.conf.broker_url = os.environ.get("REDISTOGO_URL","redis://localhost:6379/0")
 
 username = os.environ.get('USERNAME')
 password = os.environ.get('PASSWORD')
+
 
 @app.task
 def amazon_links(video_id, youtube_url, channel_id):
@@ -31,7 +33,6 @@ def amazon_links(video_id, youtube_url, channel_id):
             converted_link = convert(link)
             if converted_link:
                 abunda_links.append(converted_link)
-
     
     JSON = {"video_id": video_id, "views": video_views, "abunda_links": abunda_links}
 
