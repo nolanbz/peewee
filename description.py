@@ -15,7 +15,7 @@ def getlinks(youtube_link):
     browser = driver()
     print(youtube_link)
     browser.get(youtube_link)
-    video_path = "//div[@class='html5-video-container']/video[@class='video-stream html5-main-video']"
+    video_path = "//yt-img-shadow[@id='avatar']/img[@id='img']/@src"
 
     try:
         WebDriverWait(browser, 20).until(

@@ -9,3 +9,4 @@ def getviews(browser):
         print("Unable to find view count... keeping flow")
 
     return views
+
