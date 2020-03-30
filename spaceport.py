@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_restful import reqparse
 from job import amazon_links
+from job import add_consumer
 
 
 app = Flask(__name__)
@@ -21,7 +22,8 @@ def youtube_post():
         if video_id:
             if link:
                 payload = "we workin"
-                amazon_links.apply_async((video_id, link, channnel_id), queue=channnel_id)
+                amazon_links.apply_async((video_id, link), queue=channnel_id)
+                add_consumer(channnel_id)
             else:
                 payload = "missing link", 400
         else:
