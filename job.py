@@ -12,12 +12,12 @@ username = os.environ.get('USERNAME')
 password = os.environ.get('PASSWORD')
 
 
+def add_consumer(channel_id):
+    app.control.add_consumer(channel_id, reply=True)
+
 @app.task
 def amazon_links(video_id, video_url):
-
-    print(video_url)
-    print(video_id)
-
+    
     abunda_links = []
     amazon_links = []
     video_views = ""
@@ -38,8 +38,5 @@ def amazon_links(video_id, video_url):
     post_url = "https://{}:{}@abunda-engine.herokuapp.com/video_callbacks/receive_data".format(username, password)
        
     requests.post(post_url, json=JSON)
-
-def add_consumer(channel_id):
-    app.control.add_consumer(channel_id, reply=True)
     
 

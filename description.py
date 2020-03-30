@@ -13,6 +13,7 @@ def getlinks(youtube_link):
     video_views = ""
 
     browser = driver()
+    print(youtube_link)
     browser.get(youtube_link)
     video_path = "//yt-formatted-string[@class='style-scope ytd-video-primary-info-renderer']"
 
@@ -47,7 +48,7 @@ def getlinks(youtube_link):
         browser.quit()
 
     except TimeoutException:
-
+        browser.save_screenshot("youtube.png")
         browser.quit()
         print("Failed to load youtube video link... keeping flow")
 
