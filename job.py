@@ -13,7 +13,13 @@ password = os.environ.get('PASSWORD')
 
 
 def add_consumer(channel_id):
+
+    active_queues = app.control.inspect().active_queues()
+
+    print(active_queues)
+
     app.control.add_consumer(channel_id, reply=True)
+
 
 @app.task
 def amazon_links(video_id, video_url):
