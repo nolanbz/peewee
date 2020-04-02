@@ -16,6 +16,7 @@ def add_consumer(channel_id):
 
     active_queues = app.control.inspect().active_queues()
 
+    print(channel_id)
     print(active_queues)
 
     app.control.add_consumer(channel_id, reply=True)
