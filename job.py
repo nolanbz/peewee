@@ -18,7 +18,7 @@ def add_consumer(channel_id):
 @app.task
 def amazon_links(video_id, video_url):
     
-    abunda_links = []
+    abunda_ids = []
     amazon_links = []
     video_views = ""
     
@@ -31,9 +31,9 @@ def amazon_links(video_id, video_url):
         for link in amazon_links:
             converted_link = convert(link)
             if converted_link:
-                abunda_links.append(converted_link)
+                abunda_ids.append(converted_link)
     
-    JSON = {"video_id": video_id, "views": video_views, "abunda_links": abunda_links}
+    JSON = {"video_id": video_id, "views": video_views, "abunda_ids": abunda_ids}
 
     post_url = "https://{}:{}@abunda-engine.herokuapp.com/video_callbacks/receive_data".format(username, password)
        

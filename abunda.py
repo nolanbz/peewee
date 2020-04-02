@@ -3,7 +3,7 @@ import json
 
 def convert(link):
 
-    abunda_url = ""
+    abunda_id = int()
     payload = "https://abunda-engine.herokuapp.com/amazon-link-handler?amz_link={}&speed=true".format(link)
     headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
     get_request = requests.get(payload, headers=headers)
@@ -14,10 +14,10 @@ def convert(link):
             price = response["price_good"]
             # Check if price is over $50            
             if price:
-                abunda_url = response["url"]
+                abunda_id = response["id"]
         except:
             print("no abunda url returned")
     else:
         print("Failed to upload link... keeping flow")
     
-    return abunda_url
+    return abunda_id

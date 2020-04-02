@@ -52,6 +52,8 @@ def getlinks(youtube_link):
         browser.quit()
         print("Failed to load youtube video link... keeping flow")
 
+        # TODO: send abunda links error
+
 
     return [video_views, amazon_urls]
 
