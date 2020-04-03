@@ -15,17 +15,20 @@ password = os.environ.get('PASSWORD')
 def add_consumer(channel_id):
 
     active_queues = app.control.inspect().active_queues()
+    options = {'auto_delete': True}
+    app.control.add_consumer(channel_id, options, reply=True)
 
     try:
         print("CHANNEL ID: ", channel_id)
-        print("AUTO DELETE: ", app.backends.amqp.auto_delete())
-        print("NAME: ", app.backends.amqp.name())
+        
+        # print("AUTO DELETE: ", app.backends.amqp.auto_delete())
+        # print("NAME: ", app.backends.amqp.name())
     except:
         print("wrong code")
-        
+
     print(active_queues)
 
-    app.control.add_consumer(channel_id, reply=True)
+    
     
 
 
