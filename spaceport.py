@@ -20,7 +20,7 @@ def youtube_post():
         if video_id:
             if video_url:
                 payload = "we workin"
-                amazon_links.apply_async((video_id, video_url), queue = channnel_id)
+                amazon_links.apply_async((video_id, video_url), queue=channnel_id)
                 add_consumer(channnel_id)
             else:
                 payload = "missing link", 400
