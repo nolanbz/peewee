@@ -16,7 +16,7 @@ def add_consumer(channel_id):
 
     active_queues = app.control.inspect().active_queues()
     # app.control.add_consumer(channel_id, reply=True)
-    app.control.add_consumer(queue=channel_id, exchange="exchange", exchange_type="direct", routing_key="key", durable=False, auto_delete=True, reply=True)
+    app.control.add_consumer(queue=channel_id, auto_delete=True, reply=True)
 
     try:
         print("CHANNEL ID: ", channel_id)
