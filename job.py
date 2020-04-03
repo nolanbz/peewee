@@ -15,7 +15,6 @@ password = os.environ.get('PASSWORD')
 def add_consumer(channel_id):    
     app.control.add_consumer(queue=channel_id, auto_delete=True, reply=True)
 
-
 @app.task
 def amazon_links(video_id, video_url):
     
@@ -42,7 +41,9 @@ def amazon_links(video_id, video_url):
 
     try:
         i = app.control.inspect()
-        print(i.reserved())
+        reserved = i.reserved()
+        print(reserved)
+        print(len(reserved))
     except:
         print("Failed to get reserved")
     
