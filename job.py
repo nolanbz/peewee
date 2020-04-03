@@ -12,21 +12,8 @@ username = os.environ.get('USERNAME')
 password = os.environ.get('PASSWORD')
 
 
-def add_consumer(channel_id):
-
-    active_queues = app.control.inspect().active_queues()
-    # app.control.add_consumer(channel_id, reply=True)
+def add_consumer(channel_id):    
     app.control.add_consumer(queue=channel_id, auto_delete=True, reply=True)
-
-    try:
-        print("CHANNEL ID: ", channel_id)
-    except:
-        print("wrong code")
-
-    print(active_queues)
-
-    
-    
 
 
 @app.task
@@ -52,5 +39,11 @@ def amazon_links(video_id, video_url):
     post_url = "https://{}:{}@abunda-engine.herokuapp.com/video_callbacks/receive_data".format(username, password)
        
     requests.post(post_url, json=JSON)
+
+    try:
+        i = app.control.inspect()
+        print(i.reserved())
+    except:
+        print("Failed to get reserved")
     
 
