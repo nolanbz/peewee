@@ -44,6 +44,7 @@ def link_check():
     video_id = args["video_id"]
     video_url = args["link"]
     channnel_id = args["channel_id"]
+    detected = False
     
     if channnel_id:
         if video_id:
@@ -56,7 +57,7 @@ def link_check():
             payload = "missing video_id", 400
     else:
         payload = "missing channel_id", 400
-        
+
     JSON = {"video_id": video_id, "channel_id": channnel_id, "links_present": detected, "message":payload}
 
     return JSON
