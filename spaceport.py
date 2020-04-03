@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask_restful import reqparse
 from job import amazon_links, add_consumer
+from linkdetector import detect
 
 app = Flask(__name__)
 
@@ -22,6 +23,32 @@ def youtube_post():
                 payload = "we workin"
                 amazon_links.apply_async((video_id, video_url), queue=channnel_id)
                 add_consumer(channnel_id)
+            else:
+                payload = "missing link", 400
+        else:
+            payload = "missing video_id", 400
+    else:
+        payload = "missing channel_id", 400
+
+    return {"message":payload}
+
+@app.route("/link-check/", strict_slashes=False, methods=["POST"])
+def link_check():
+    parser = reqparse.RequestParser()
+    parser.add_argument("video_id")
+    parser.add_argument("link")
+    parser.add_argument("channel_id")
+    args = parser.parse_args()
+    
+    video_id = args["video_id"]
+    video_url = args["link"]
+    channnel_id = args["channel_id"]
+    
+    if channnel_id:
+        if video_id:
+            if video_url:
+                payload = "we workin"
+                detect(video_url, "abunda")
             else:
                 payload = "missing link", 400
         else:
