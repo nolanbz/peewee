@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_restful import reqparse
 from job import amazon_links, add_consumer
 from linkdetector import detect
+import requests
 
 app = Flask(__name__)
 
@@ -47,16 +48,18 @@ def link_check():
     if channnel_id:
         if video_id:
             if video_url:
+                detected = detect(video_url, "abunda")
                 payload = "we workin"
-                detect(video_url, "abunda")
             else:
                 payload = "missing link", 400
         else:
             payload = "missing video_id", 400
     else:
         payload = "missing channel_id", 400
+        
+    JSON = {"video_id": video_id, "channel_id": channnel_id, "links_present": detected, "message":payload}
 
-    return {"message":payload}
+    return JSON
 
 
 # Welcome to PEEWEE
