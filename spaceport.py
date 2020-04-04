@@ -1,12 +1,29 @@
 from flask import Flask, render_template
+from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_restful import reqparse
 from job import amazon_links, add_consumer
 from linkdetector import detect
-import requests
+import os
 
 app = Flask(__name__)
+auth = HTTPBasicAuth()
+
+username = os.environ.get("USERNAME")
+password = os.environ.get("PASSWORD")
+
+users = {
+    username: generate_password_hash(password)
+}
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users:
+        return check_password_hash(users.get(username), password)
+    return False
 
 @app.route("/youtube-url/", strict_slashes=False, methods=["POST"])
+@auth.login_required
 def youtube_post():
     parser = reqparse.RequestParser()
     parser.add_argument("video_id")
@@ -34,6 +51,7 @@ def youtube_post():
     return {"message":payload}
 
 @app.route("/link-check/", strict_slashes=False, methods=["POST"])
+@auth.login_required
 def link_check():
     parser = reqparse.RequestParser()
     parser.add_argument("video_id")
@@ -45,7 +63,7 @@ def link_check():
     video_url = args["link"]
     channnel_id = args["channel_id"]
     detected = False
-    
+
     if channnel_id:
         if video_id:
             if video_url:
