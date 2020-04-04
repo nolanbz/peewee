@@ -6,7 +6,7 @@ import requests
 import time
 
 app = Celery()
-app.conf.broker_url = os.environ.get("REDISTOGO_URL","redis://localhost:6379/0")
+app.conf.broker_url = os.environ.get("REDISGREEN_URL","redis://localhost:6379/0")
 
 username = os.environ.get('USERNAME')
 password = os.environ.get('PASSWORD')

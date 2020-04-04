@@ -3,6 +3,8 @@ import json
 
 def convert(link):
 
+    print("AMAZON URL", link)
+
     abunda_id = int()
     payload = "https://abunda-engine.herokuapp.com/amazon-link-handler?amz_link={}&speed=true".format(link)
     headers = {'Content-Type': 'application/json', 'Accept': 'application/json'}
@@ -10,6 +12,7 @@ def convert(link):
 
     if get_request.status_code == 200:
         response = get_request.json()
+        print("RESPONSE", response)
         try:
             price = response["price_good"]
             # Check if price is over $50            
