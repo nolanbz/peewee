@@ -28,13 +28,13 @@ def getlinks(youtube_link):
             video_views = getviews(browser)
 
             # Click show more button
-            # show_more_button = browser.find_element_by_class_name(button_class_name)
-            # show_more_button.click()
+            show_more_button = browser.find_element_by_class_name(button_class_name)
+            show_more_button.click()
             description_links = browser.find_elements_by_xpath(link_path)
 
 
 
-
+            
 
 
 
