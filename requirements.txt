@@ -6,3 +6,4 @@ celery
 requests
 redis
 werkzeug
+flask_httpauth
