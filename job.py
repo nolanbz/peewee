@@ -46,5 +46,3 @@ def amazon_links(video_id, video_url):
         print(len(reserved))
     except:
         print("Failed to get reserved")
-    
-

@@ -32,15 +32,6 @@ def getlinks(youtube_link):
             show_more_button.click()
             description_links = browser.find_elements_by_xpath(link_path)
 
-
-
-            
-
-
-
-
-
-
             formatted_links = []
 
             # Turn link elements into text
@@ -65,5 +56,3 @@ def getlinks(youtube_link):
 
 
     return [video_views, amazon_urls]
-
-
